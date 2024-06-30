@@ -5,6 +5,7 @@ import Footer from './Footer/Footer';
 import BreweryList from './Card/BreweryList';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import "./style.css";
+import Swal from 'sweetalert2'
 
 const Layout = () => {
   const [breweriesData, setBreweriesData] = useState([]);
@@ -59,11 +60,23 @@ const Layout = () => {
             fetchBreweries(token, 1);
         } else {
             navigate('/');
-            throw new Error(responseData.message);
+            Swal.fire({
+                title: 'Errore!',
+                text: responseData.message,
+                icon: 'info',
+                confirmButtonColor: '#1e6dcb',
+                confirmButtonText: 'Ok'
+              })
         }
 
     } catch (error) {
-        console.error('Errore nella richiesta di login:', error);
+        Swal.fire({
+            title: 'Errore!',
+            text: 'Si è verificato un errore',
+            icon: 'info',
+            confirmButtonColor: '#1e6dcb',
+            confirmButtonText: 'Ok'
+          })
     }
 };
 
@@ -77,8 +90,14 @@ const Layout = () => {
         if (response.ok) {
           return response.json();
         }
-        throw new Error('Network response was not ok.');
-      })
+        Swal.fire({
+            title: 'Errore!',
+            text: 'Si è verificato un errore',
+            icon: 'info',
+            confirmButtonColor: '#1e6dcb',
+            confirmButtonText: 'Ok'
+          })
+        })
       .then(data => {
         setBreweriesData(prevData => [...prevData, ...data]);
         if (data.length === 0) {
@@ -86,7 +105,13 @@ const Layout = () => {
         }
       })
       .catch(error => {
-        console.error('There was a problem fetching breweries data:', error);
+        Swal.fire({
+            title: 'Errore!',
+            text: 'Errore nell\'elaborazione dei dati',
+            icon: 'info',
+            confirmButtonColor: '#1e6dcb',
+            confirmButtonText: 'Ok'
+          })
       })
       .finally(() => {
         setLoading(false); // Quando finisce il caricamento, impostiamo il loading a false

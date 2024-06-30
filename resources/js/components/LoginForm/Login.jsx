@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./style.css";
+import Swal from 'sweetalert2'
 
 const Login = (props) => {
   const [username, setUsername] = useState('')
@@ -17,16 +18,19 @@ const Login = (props) => {
     setPasswordError('')
 
     if ('' === username) {
-      setUsernameError('Please enter your email')
+      setUsernameError('Inserisci il nome utente')
       return
     }
 
     if ('' === password) {
-      setPasswordError('Please enter a password')
+      setPasswordError('Inserisci la password')
       return
     }
     login(username, password);
   }
+
+
+
   const login = async (username, password) => {
     try {
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -40,22 +44,32 @@ const Login = (props) => {
             body: JSON.stringify({ username, password, timezone }),
         });
 
-        if (!response.ok) {
-            throw new Error('Login failed');
-        }
-
         const responseData = await response.json();
-
+        if (!response.ok) {
+            Swal.fire({
+                title: 'Errore!',
+                text: responseData.message,
+                icon: 'info',
+                confirmButtonColor: '#1e6dcb',
+                confirmButtonText: 'Ok'
+              })
+        }
         localStorage.setItem('loginToken', responseData.token);
         localStorage.setItem('expiries', responseData.expires_at);
         localStorage.setItem('idUser', responseData.idUser);
-
         navigate('/beer-list');
     } catch (error) {
-        console.error('Errore nella richiesta di login:', error);
-        setUsernameError('Credenziali non trovate');
+        Swal.fire({
+            title: 'Errore!',
+            text: 'Si è verificato un errore',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#1e6dcb',
+          })
     }
 };
+
+
   return (
     <form>
     <div className={'row'}>
