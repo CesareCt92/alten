@@ -12,7 +12,7 @@ const Layout = () => {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(true); // State per gestire il caricamento
   const navigate = useNavigate();
-  const API_BASE_URL = 'http://127.0.0.1:8000';
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
   const token = localStorage.getItem('loginToken');
   const expiryToken = localStorage.getItem('expiries');

@@ -7,23 +7,19 @@ const Login = (props) => {
   const [password, setPassword] = useState('')
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const API_BASE_URL = 'http://127.0.0.1:8000';
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
 
   const navigate = useNavigate()
 
   const onButtonClick = async () => {
-    // Set initial error values to empty
     setUsernameError('')
     setPasswordError('')
 
-    // Check if the user has entered both fields correctly
     if ('' === username) {
       setUsernameError('Please enter your email')
       return
     }
-
-
 
     if ('' === password) {
       setPasswordError('Please enter a password')
@@ -61,6 +57,7 @@ const Login = (props) => {
     }
 };
   return (
+    <form>
     <div className={'row'}>
     <div className={'mainContainer'}>
       <div className={'titleContainer'}>
@@ -93,6 +90,7 @@ const Login = (props) => {
       </div>
     </div>
     </div>
+    </form>
   )
 }
 
