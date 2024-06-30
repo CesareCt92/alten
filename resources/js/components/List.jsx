@@ -11,7 +11,7 @@ const Layout = () => {
   const [breweriesData, setBreweriesData] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(true); // State per gestire il caricamento
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
@@ -114,7 +114,7 @@ const Layout = () => {
           })
       })
       .finally(() => {
-        setLoading(false); // Quando finisce il caricamento, impostiamo il loading a false
+        setLoading(false);
       });
   };
 
