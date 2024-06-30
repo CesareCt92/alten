@@ -1,0 +1,11 @@
+
+.custom-header {
+    background-color: #0093d5;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .custom-logo img {
+    max-width: 10%;
+    height: auto;
+  }

@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.layout-container {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Sfumatura nera con trasparenza */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Assicura che sia sopra ogni altra cosa */
+  }
+
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+
+  .loading-spinner .dot1,
+  .loading-spinner .dot2,
+  .loading-spinner .dot3 {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0 5px;
+    opacity: 0.8; /* Opacità iniziale */
+    animation: dotPulse 1.5s infinite;
+  }
+
+  .loading-spinner .dot2 {
+    animation-delay: 0.5s;
+  }
+
+  .loading-spinner .dot3 {
+    animation-delay: 1s;
+  }
+
+  @keyframes dotPulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.3);
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+  }
